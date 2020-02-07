@@ -8,12 +8,12 @@ typedef struct _vector{
 	char* name;
 } vector;
 
-box* vector_create() {
-	vector* vector = (vector*)calloc(1, sizeof(vector));
+box* vector_Ctor() {
+	vector* vector = (struct _vector*)calloc(1, sizeof(vector));
 	vector->name = "vec_n";
 	return (box*) vector;
 }
 
-void Dtor(vector* vec) {
+void vector_Dtor(vector* vec) {
 	free(vec);
 }

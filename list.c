@@ -10,17 +10,21 @@ struct _list{
 
 typedef struct _list list;
 
-box* list_create() {
-	list* list = (list*)calloc(1, sizeof(list));
-	list->name = "list_n";
-	return (box*) list;
-}
 
-box* list_create() {
+
+/*box* list_create() {
 	box *temp = (box*)calloc(1, sizeof(box));
 	return temp;
+}*/
+
+void list_Dtor(box* box) {
+	//free(list);
 }
 
-void Dtor(* list) {
-	free(list);
+box* list_Ctor() {
+	printf("a\n");
+	list* list = (struct _list*)(calloc(1, sizeof(list)));
+	list->name = "list_n";
+	list->b.Dtor = list_Dtor;
+	return (box*) list;
 }

@@ -3,4 +3,4 @@
 
 //публичный интерфейс к листу
 
-box* list_create();
+box* list_Ctor();

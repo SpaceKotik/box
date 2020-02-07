@@ -1,4 +1,4 @@
 #pragma once
 #include "box.h"
 
-box* vector_create();
+box* vector_Ctor();

@@ -7,8 +7,8 @@
 #include "vector.h"
 
 int main() {
-	box* l = list_create();
-	box* v = vector_create();
+	box* l = list_Ctor();
+	box* v = vector_Ctor();
 
 	l->Dtor(l);
 	v->Dtor(v);
