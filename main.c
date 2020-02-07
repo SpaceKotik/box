@@ -10,7 +10,9 @@ int main() {
 	box* l = list_Ctor();
 	box* v = vector_Ctor();
 
-	l->Dtor(l);
+
 	v->Dtor(v);
+	l->Dtor(l);
+
 	return 0;
 }

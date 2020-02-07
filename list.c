@@ -17,7 +17,7 @@ typedef struct _list list;
 	return temp;
 }*/
 
-void list_Dtor(box* box) {
+void list_Dtor(box* list) {
 	//free(list);
 }
 
