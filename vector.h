@@ -8,6 +8,7 @@
 
 void vector_Dtor (struct _box *box);
 void vector_print_all_elems (struct _box *box);
+void push_back (struct _box *box, int elem);
 void vector_insert (struct _box *box, int pos, int elem);
 int vector_erase (struct _box *box, int pos);
 int vector_capacity (struct _box *box);
