@@ -51,7 +51,7 @@ void list_insert(box *list_b, int pos, data_t data) {
 	}
 }
 
-data_t list_get(box *list, data_t pos) {
+data_t list_get(box *list_b, data_t pos) {
 	list_t *list = (list_t*)(list_b);
 	for (int i = 0; i < pos; i++) {
 		cur = cur->next;
@@ -59,10 +59,25 @@ data_t list_get(box *list, data_t pos) {
 	return cur->data;
 }
 
-void list_print_all_elems (box *list) {
+void list_print_all_elems (box *list_b) {
 	list_t *list = (list_t*)(list_b);
-	for(int i = 0; i < list->size; i++)
-		printf("%");
+
+	cur = list;
+	do {
+		printf("%d ", cur->data);
+		cur = cur->next;
+	} while (!istail(cur));
+}
+
+void list_dump (box *list_b) {
+	list_t *list = (list_t*)(list_b);
+
+	printf("\n#____________| LIST_DUMP |\n");
+	if (list->size == 0)
+		printf("list is empty\n");
+	else
+		list_print_all_elems(list_b);
+	printf("\n#___________| END L_DUMP |\n");
 }
 
 data_t list_erase(box *list_b, data_t pos) {
