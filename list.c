@@ -17,25 +17,85 @@ typedef struct _list_t{
 	int size;
 }list_t;
 
-//comment
-void list_push_back(box *list_b, data_t data_new) {
+
+bool istail(list_t* list) {
+	if (list->next == NULL)
+		return 1;
+	else
+		return 0;
+}
+
+void list_insert(box *list_b, int pos, data_t data) {
 	list_t *list = (list_t*)(list_b);
+	list_t* cur = list;
+
 	elem_t *elem = (elem_t*)calloc(1, sizeof(elem_t));
 	elem->data = data_new;
-	if (list->size == 0){
+	for (int i = 0; i < pos; i++) {
+		cur = cur->next;
+	}
+	if (list->size == 0) {
 		list->head = elem;
 		list->tail = elem;
 		elem->next = NULL;
 		elem->prev = NULL;
-	} else {
+	} else if (istail(cur)) {
 		elem->next = NULL;
 		elem->prev = list->tail;
-		list->tail = elem;
+		list->tail = elem;		
+	} else {
+		elem->next = cur->next;
+		elem->prev = cur;
+		cur->next->prev = elem;
+		cur->next = elem;
 	}
 }
 
-void list_pop_back(box *list_b) {
+data_t list_get(box *list, data_t pos) {
 	list_t *list = (list_t*)(list_b);
+	for (int i = 0; i < pos; i++) {
+		cur = cur->next;
+	}
+	return cur->data;
+}
+
+void list_print_all_elems (box *list) {
+	list_t *list = (list_t*)(list_b);
+	for(int i = 0; i < list->size; i++)
+		printf("%");
+}
+
+data_t list_erase(box *list_b, data_t pos) {
+	list_t *list = (list_t*)(list_b);
+	data_t data = cur->data;
+
+	for (int i = 0; i < pos; i++) {
+		cur = cur->next;
+	}
+	if (istail(cur)) {
+		return list_pop_back(list_b);
+	} else if(pos == 0) {
+		cur->next->prev = NULL;
+		list->head = cur->next;
+		free(cur);
+	} else {
+		cur->next->prev = cur->prev;
+		cur->prev->next = cur->next;
+		free(cur);
+	}
+
+	return data;
+}
+
+void list_push_back(box *list_b, data_t data_new) {
+	list_t *list = (list_t*)(list_b);
+	n_tail = list_size - 1
+	list_insert(n_tail);
+}
+
+data_t list_pop_back(box *list_b) {
+	list_t *list = (list_t*)(list_b);
+	data_t data = list->tail->data;
 	printf("%d\n", list->tail->data);
 	list->tail->data = _POISON;
 	if (list->size == 1) {
@@ -48,6 +108,8 @@ void list_pop_back(box *list_b) {
 		free(list->tail->next);
 		list->tail->next = NULL;
 	}
+
+	return data;
 }
 
 int list_size(box *list_b){
